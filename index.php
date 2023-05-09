@@ -51,7 +51,7 @@ include "storeTasks.php"
                     </div>
                 </div>
 
-                <h3 class="uncomplete_title fw-bold my_font text-center position-relative" v-if="tasks.length > 0"><b
+                <h3 class="uncomplete_title fw-bold my_font text-center position-relative" v-if="tasklist.length > 0"><b
                         class="un text-danger display-5">Un</b>completed tasks</h3>
                 <!-- create listtasks uncomplete container  -->
                 <div class="tasks overflow-auto W-100 my_font">
@@ -67,7 +67,7 @@ include "storeTasks.php"
                             <span class="uncomplete_text">{{task.text}}</span>
                             <div class="uncomplete">
                                 <i class="fa fa-check-circle" aria-hidden="true" @click="changeStatus(index)"></i>
-                                <i class="fa-solid fa-trash-can"></i>
+                                <i class="fa-solid fa-trash-can" @click="deleteTask(index)"></i>
                             </div>
                         </li>
                     </ul>
@@ -77,11 +77,10 @@ include "storeTasks.php"
             </div>
 
             <!-- create tasks complete container  -->
-            <div class="Task_complete_container card rounded-5 p-3 my_font justify-content-center flex-grow-1">
+            <div class="Task_complete_container card rounded-5 p-3 my_font justify-content-center flex-grow-1"
+                v-if="tasklist.length > 0">
 
-                <!-- v-if="tasksComplete.length > 0 && tasks.length > 0" -->
-
-                <h3 class="fw-bold text-center">Completed tasks</h3>
+                <h3 class=" fw-bold text-center">Completed tasks</h3>
                 <div class="tasks overflow-auto W-100">
                     <ul class="my_ul list-unstyled text-decoration-line-through" v-if="tasklist.length">
                         <li class=" justify-content-between fs-4" v-for="(task,index) in tasklist"
@@ -89,7 +88,7 @@ include "storeTasks.php"
                             <span>{{task.text}}</span>
                             <div class="complete"> <!-- @click="completeTask(index)"-->
                                 <i class="fa fa-check-circle" aria-hidden="true" @click="changeStatus(index)"></i>
-                                <i class="fa-solid fa-trash-can"></i>
+                                <i class="fa-solid fa-trash-can" @click="deleteTask(index)"></i>
                             </div>
                         </li>
                     </ul>

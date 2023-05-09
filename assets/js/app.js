@@ -9,6 +9,7 @@ createApp({
             listUrl: "getTasks.php",
             storeUrl: "storeTasks.php",
             statusUrl: "changeStatus.php",
+            deleteUrl: "deleteTasks.php",
             error: null,
             newTask: {
                 text: "",
@@ -37,10 +38,20 @@ createApp({
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }).then(response => {
                     this.taskList = response.data;
-                    console.log(response);
                 })
         },
+        deleteJsonElement(index) {
+            const data = {
+                currentIndex: index
+            }
 
+            axios.post(this.deleteUrl, data,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                }).then(response => {
+                    this.taskList = response.data;
+                })
+        },
         changeStatusJson(index) {
             const data = {
                 currentIndex: index
@@ -51,12 +62,11 @@ createApp({
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }).then(response => {
                     this.taskList = response.data;
-                    console.log(response.data);
                 })
         },
         addTask() {
             if (this.newTask.text.length > 5) {
-                this.tasks.unshift(this.newTask)
+                this.tasklist.unshift(this.newTask)
                 this.changeJsonList(this.newTask)
                 this.newTask = {
                     text: "",
@@ -67,6 +77,11 @@ createApp({
             } else {
                 this.error = "word too short"
             }
+        },
+        deleteTask(index) {
+            this.tasklist.splice(index, 1)
+            this.deleteJsonElement(index)
+
         },
         changeStatus(index) {
             this.tasklist[index].done = !this.tasklist[index].done

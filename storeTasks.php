@@ -27,3 +27,13 @@ if (isset($_POST['newTaskKey'])) {
 }
 
 ?>
+
+
+<!-- [
+{ "text": "Pulire la cucina", "done": false },
+{ "text": "Fare la spesa", "done": true },
+{ "text": "Stirare la biancheria", "done": false },
+{ "text": "Preparare la cena", "done": true },
+{ "text": "Passeggiare il cane", "done": false },
+{ "text": "Scrivere una lettera", "done": true }
+] -->
