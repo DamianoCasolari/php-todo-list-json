@@ -1,6 +1,6 @@
 <?php
-// include "getTasks.php"
-?>
+include "storeTasks.php"
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">

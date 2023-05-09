@@ -11,7 +11,7 @@ createApp({
             error: null,
             newTask: {
                 text: "",
-                done: false,
+                done: 0
             },
 
         }
@@ -20,8 +20,8 @@ createApp({
         createTaskList() {
             axios.get(this.listUrl).then(response => {
                 this.tasklist = response.data;
-                this.tasksComplete = this.tasklist.filter((object) => object.done === true);
-                this.tasks = this.tasklist.filter((object) => object.done === false);
+                this.tasksComplete = this.tasklist.filter((object) => object.done == true);
+                this.tasks = this.tasklist.filter((object) => object.done == false);
             })
         },
 
@@ -35,7 +35,7 @@ createApp({
 
             axios.post(this.storeUrl, data,
                 {
-                    headers: { 'Content-Type': 'multipart/form-date' }
+                    headers: { 'Content-Type': 'multipart/form-data' }
                 }).then(response => {
                     this.taskList = response.data;
                     console.log(response);
@@ -51,8 +51,9 @@ createApp({
                 this.changeJsonList(this.newTask)
                 this.newTask = {
                     text: "",
-                    done: false,
+                    done: 0
                 },
+
                     this.error = ""
             } else {
                 this.error = "word too short"
