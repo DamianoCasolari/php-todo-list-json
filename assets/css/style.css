@@ -1,0 +1,89 @@
+/* General selector */
+
+.my_font {
+    font-family: 'Delicious Handrawn', cursive;
+}
+
+
+.my_background {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: -2;
+    background: linear-gradient(45deg, #b4b0ff 60%, rgba(0, 0, 0, 0) 60%), url('https://www.workitect.it/wp-content/uploads/2022/04/Consigli-to-do-list.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* different container  */
+
+.counter {
+    height: 100px;
+    text-shadow: 5px 5px 7px rgb(86, 86, 86);
+}
+
+.my_container {
+    height: 100%;
+}
+
+footer {
+    height: 50px;
+
+}
+
+.Task_uncomplete_container,
+.Task_complete_container {
+    height: 80%;
+    width: 80%;
+    margin: 30px;
+    box-shadow: 5px 5px 7px rgb(86, 86, 86);
+
+}
+
+/* Hover effect  */
+
+.uncomplete i {
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.uncomplete i:hover {
+    transform: scale(1.3);
+    color: greenyellow;
+}
+
+.complete i {
+    color: greenyellow;
+
+}
+
+
+/* customitation scrollbar  */
+
+::-webkit-scrollbar {
+    width: 1px;
+    height: 1px;
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #999;
+}
+
+@media screen and (min-width:576px) {
+
+    .Task_uncomplete_container,
+    .Task_complete_container {
+        width: 40%;
+    }
+
+    .my_container {
+        flex-wrap: nowrap;
+        height: calc(100vh - 150px);
+    }
+}
