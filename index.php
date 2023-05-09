@@ -51,8 +51,9 @@ include "storeTasks.php"
                     </div>
                 </div>
 
-                <h3 class="uncomplete_title fw-bold my_font text-center position-relative" v-if="tasklist.length > 0"><b
-                        class="un text-danger display-5">Un</b>completed tasks</h3>
+                <h3 class="uncomplete_title fw-bold my_font text-center position-relative"
+                    v-if="tasklist.length > 0 && !allTasksDone"><b class="un text-danger display-5">Un</b>completed
+                    tasks</h3>
                 <!-- create listtasks uncomplete container  -->
                 <div class="tasks overflow-auto W-100 my_font">
                     <div class="fs-4 d-flex justify-content-between m-3" v-if="newTask.text.length > 0">
@@ -61,7 +62,7 @@ include "storeTasks.php"
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                         </div>
                     </div>
-                    <ul class="list-unstyled " v-if="tasklist.length > 0">
+                    <ul class="list-unstyled " v-if="tasklist.length > 0 && !allTasksDone">
                         <li v-for="(task,index) in tasklist" class=" justify-content-between fs-4"
                             :class="task.done ? 'd-none' : 'm-3 d-flex'">
                             <span class="uncomplete_text">{{task.text}}</span>
@@ -78,7 +79,7 @@ include "storeTasks.php"
 
             <!-- create tasks complete container  -->
             <div class="Task_complete_container card rounded-5 p-3 my_font justify-content-center flex-grow-1"
-                v-if="tasklist.length > 0">
+                v-if="tasklist.length > 0" v-show="!allTasksUndone">
 
                 <h3 class=" fw-bold text-center">Completed tasks</h3>
                 <div class="tasks overflow-auto W-100">

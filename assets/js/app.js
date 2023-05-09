@@ -17,14 +17,25 @@ createApp({
             },
 
         }
+    }, computed: {
+        allTasksDone() {
+
+            return this.tasklist.length > 0 && this.tasklist.every(task => task.done);
+
+        }, allTasksUndone() {
+
+            return this.tasklist.length > 0 && this.tasklist.every(task => !task.done);
+
+        },
     },
     methods: {
         createTaskList() {
             axios.get(this.listUrl).then(response => {
                 this.tasklist = response.data;
                 console.log(this.tasklist);
-                // this.tasksComplete = this.tasklist.filter((object) => object.done == true);
-                // this.tasks = this.tasklist.filter((object) => object.done == false);
+                this.tasksComplete = this.tasklist.filter((object) => object.done == true);
+                console.log(this.tasksComplete);
+                this.tasks = this.tasklist.filter((object) => object.done == false);
             })
         },
         changeJsonList(newTask) {
@@ -67,6 +78,7 @@ createApp({
         addTask() {
             if (this.newTask.text.length > 5) {
                 this.tasklist.unshift(this.newTask)
+                this.tasks.unshift(this.newTask)
                 this.changeJsonList(this.newTask)
                 this.newTask = {
                     text: "",
@@ -86,6 +98,7 @@ createApp({
         changeStatus(index) {
             this.tasklist[index].done = !this.tasklist[index].done
             this.changeStatusJson(index)
+            console.log(this.allTasksUndone);
         }
     },
     created() {
