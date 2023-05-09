@@ -20,13 +20,11 @@ createApp({
         createTaskList() {
             axios.get(this.listUrl).then(response => {
                 this.tasklist = response.data;
-                this.tasksComplete = this.tasklist.filter((object) => object.done == true);
-                this.tasks = this.tasklist.filter((object) => object.done == false);
+                console.log(this.tasklist);
+                // this.tasksComplete = this.tasklist.filter((object) => object.done == true);
+                // this.tasks = this.tasklist.filter((object) => object.done == false);
             })
         },
-
-
-
         changeJsonList(newTask) {
 
             const data = {
@@ -42,9 +40,19 @@ createApp({
                 })
         },
 
+        changeStatus(index) {
+            const data = {
+                currentIndex: index
+            }
 
-
-
+            axios.post(this.storeUrl, data,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                }).then(response => {
+                    this.taskList = response.data;
+                    console.log(response);
+                })
+        },
         addTask() {
             if (this.newTask.text.length > 5) {
                 this.tasks.unshift(this.newTask)
@@ -59,16 +67,10 @@ createApp({
                 this.error = "word too short"
             }
         },
-        completeTask(index) {
-            this.tasksComplete.unshift(this.tasks[index])
-            this.tasks.splice(index, 1)
-
-        },
-        uncompleteTask(index) {
-            this.tasksComplete.splice(index, 1)
-            this.tasks.unshift(this.tasks[index])
-
-        },
+        changeStatus(index) {
+            this.tasklist[index].done = !this.tasklist[index].done
+            this.changeStatus(index)
+        }
     },
     created() {
         this.createTaskList()
@@ -120,7 +122,7 @@ createApp({
 //                 this.error = "word too short"
 //             }
 //         },
-//         completeTask(index) {
+//         changeStatus(index) {
 //             console.log(index);
 //             this.tasksComplete.unshift(this.tasks[index])
 //             this.tasks.splice(index, 1)

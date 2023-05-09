@@ -61,11 +61,12 @@ include "storeTasks.php"
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                         </div>
                     </div>
-                    <ul class="list-unstyled " v-if="tasks.length > 0">
-                        <li v-for="(task,index) in tasks" class="d-flex justify-content-between m-3 fs-4">
+                    <ul class="list-unstyled " v-if="tasklist.length > 0">
+                        <li v-for="(task,index) in tasklist" class=" justify-content-between fs-4"
+                            :class="task.done ? 'd-none' : 'm-3 d-flex'">
                             <span class="uncomplete_text">{{task.text}}</span>
                             <div class="uncomplete">
-                                <i class="fa fa-check-circle" aria-hidden="true" @click="completeTask(index)"></i>
+                                <i class="fa fa-check-circle" aria-hidden="true" @click="changeStatus(index)"></i>
                                 <i class="fa-solid fa-trash-can"></i>
                             </div>
                         </li>
@@ -76,17 +77,18 @@ include "storeTasks.php"
             </div>
 
             <!-- create tasks complete container  -->
-            <div class="Task_complete_container card rounded-5 p-3 my_font justify-content-center flex-grow-1"
-                v-if="tasksComplete.length > 0 && tasks.length > 0">
+            <div class="Task_complete_container card rounded-5 p-3 my_font justify-content-center flex-grow-1">
+
+                <!-- v-if="tasksComplete.length > 0 && tasks.length > 0" -->
 
                 <h3 class="fw-bold text-center">Completed tasks</h3>
                 <div class="tasks overflow-auto W-100">
-                    <ul class="my_ul list-unstyled text-decoration-line-through" v-if="tasks.length">
-                        <li class="d-flex justify-content-between m-3 d-block fs-4"
-                            v-for="(task,index) in tasksComplete">
+                    <ul class="my_ul list-unstyled text-decoration-line-through" v-if="tasklist.length">
+                        <li class=" justify-content-between fs-4" v-for="(task,index) in tasklist"
+                            :class="!task.done ? 'd-none' : 'm-3 d-flex'">
                             <span>{{task.text}}</span>
                             <div class="complete"> <!-- @click="completeTask(index)"-->
-                                <i class="fa fa-check-circle" aria-hidden="true" @click="uncompleteTask(index)"></i>
+                                <i class="fa fa-check-circle" aria-hidden="true" @click="changeStatus(index)"></i>
                                 <i class="fa-solid fa-trash-can"></i>
                             </div>
                         </li>
