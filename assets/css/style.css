@@ -92,7 +92,7 @@ i {
     background-color: #999;
 }
 
-@media screen and (min-width:576px) {
+@media screen and (min-width:768px) {
 
     .Task_uncomplete_container,
     .Task_complete_container {
@@ -101,6 +101,6 @@ i {
 
     .my_container {
         flex-wrap: nowrap;
-        height: calc(100vh - 150px);
+        height: calc(100vh - 50px);
     }
 }

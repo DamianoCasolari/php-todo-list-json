@@ -5,14 +5,14 @@ createApp({
         return {
             tasklist: [],
             tasks: [],
-            getTasks: "",
+            tasksComplete: [],
             listUrl: "getTasks.php",
+            storeUrl: "storeTasks.php",
             error: null,
             newTask: {
                 text: "",
                 done: false,
             },
-            tasksComplete: [],
 
         }
     },
@@ -24,9 +24,31 @@ createApp({
                 this.tasks = this.tasklist.filter((object) => object.done === false);
             })
         },
+
+
+
+        changeJsonList(newTask) {
+
+            const data = {
+                newTaskKey: newTask
+            }
+
+            axios.post(this.storeUrl, data,
+                {
+                    headers: { 'Content-Type': 'multipart/form-date' }
+                }).then(response => {
+                    this.taskList = response.data;
+                    console.log(response);
+                })
+        },
+
+
+
+
         addTask() {
             if (this.newTask.text.length > 5) {
                 this.tasks.unshift(this.newTask)
+                this.changeJsonList(this.newTask)
                 this.newTask = {
                     text: "",
                     done: false,
