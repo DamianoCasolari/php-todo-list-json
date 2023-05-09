@@ -42,19 +42,36 @@ footer {
 
 /* Hover effect  */
 
-.uncomplete i {
+i {
     cursor: pointer;
     transition-duration: 0.4s;
+    margin: 0 5px;
 }
 
-.uncomplete i:hover {
+.uncomplete i.fa-check-circle:hover {
     transform: scale(1.3);
     color: greenyellow;
 }
 
-.complete i {
-    color: greenyellow;
+.uncomplete i.fa-trash-can:hover {
+    transform: scale(1.3);
+    color: rgb(229, 44, 44);
+}
 
+.complete i.fa-check-circle {
+    color: greenyellow;
+    margin: 0 5px;
+
+}
+
+.complete i.fa-check-circle:hover {
+    transform: scale(1.3);
+    color: rgb(0, 0, 0);
+}
+
+.complete i.fa-trash-can:hover {
+    transform: scale(1.3);
+    color: rgb(229, 44, 44);
 }
 
 

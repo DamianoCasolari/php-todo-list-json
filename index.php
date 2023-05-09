@@ -60,8 +60,9 @@
                     <ul class="list-unstyled " v-if="tasks.length > 0">
                         <li v-for="(task,index) in tasks" class="d-flex justify-content-between m-3 fs-4">
                             <span class="uncomplete_text">{{task.text}}</span>
-                            <div class="uncomplete" @click="completeTask(index)">
-                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            <div class="uncomplete">
+                                <i class="fa fa-check-circle" aria-hidden="true" @click="completeTask(index)"></i>
+                                <i class="fa-solid fa-trash-can"></i>
                             </div>
                         </li>
                     </ul>
@@ -81,7 +82,8 @@
                             v-for="(task,index) in tasksComplete">
                             <span>{{task.text}}</span>
                             <div class="complete"> <!-- @click="completeTask(index)"-->
-                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                <i class="fa fa-check-circle" aria-hidden="true" @click="uncompleteTask(index)"></i>
+                                <i class="fa-solid fa-trash-can"></i>
                             </div>
                         </li>
                     </ul>

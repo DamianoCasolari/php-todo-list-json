@@ -3,6 +3,7 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
+            tasklist: [],
             tasks: [],
             getTasks: "",
             listUrl: "getTasks.php",
@@ -18,14 +19,31 @@ createApp({
     methods: {
         createTaskList() {
             axios.get(this.listUrl).then(response => {
-                this.tasks = response.data;
-                this.tasksComplete = this.tasks.filter((object) => object.done === true);
-                this.tasks = this.tasks.filter((object) => object.done === false);
+                this.tasklist = response.data;
+                this.tasksComplete = this.tasklist.filter((object) => object.done === true);
+                this.tasks = this.tasklist.filter((object) => object.done === false);
             })
+        },
+        addTask() {
+            if (this.newTask.text.length > 5) {
+                this.tasks.unshift(this.newTask)
+                this.newTask = {
+                    text: "",
+                    done: false,
+                },
+                    this.error = ""
+            } else {
+                this.error = "word too short"
+            }
         },
         completeTask(index) {
             this.tasksComplete.unshift(this.tasks[index])
             this.tasks.splice(index, 1)
+
+        },
+        uncompleteTask(index) {
+            this.tasksComplete.splice(index, 1)
+            this.tasks.unshift(this.tasks[index])
 
         },
     },
