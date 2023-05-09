@@ -8,6 +8,7 @@ createApp({
             tasksComplete: [],
             listUrl: "getTasks.php",
             storeUrl: "storeTasks.php",
+            statusUrl: "changeStatus.php",
             error: null,
             newTask: {
                 text: "",
@@ -40,17 +41,17 @@ createApp({
                 })
         },
 
-        changeStatus(index) {
+        changeStatusJson(index) {
             const data = {
                 currentIndex: index
             }
 
-            axios.post(this.storeUrl, data,
+            axios.post(this.statusUrl, data,
                 {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }).then(response => {
                     this.taskList = response.data;
-                    console.log(response);
+                    console.log(response.data);
                 })
         },
         addTask() {
@@ -69,7 +70,7 @@ createApp({
         },
         changeStatus(index) {
             this.tasklist[index].done = !this.tasklist[index].done
-            this.changeStatus(index)
+            this.changeStatusJson(index)
         }
     },
     created() {
