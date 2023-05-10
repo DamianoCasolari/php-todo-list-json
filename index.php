@@ -63,14 +63,15 @@ include "storeTasks.php"
                         </div>
                     </div>
                     <ul class="list-unstyled " v-if="tasklist.length > 0 && !allTasksDone">
-                        <li v-for="(task,index) in tasklist" class=" justify-content-between fs-4"
-                            :class="task.done ? 'd-none' : 'm-3 d-flex'">
-                            <span class="uncomplete_text">{{task.text}}</span>
-                            <div class="uncomplete">
-                                <i class="fa fa-check-circle" aria-hidden="true" @click="changeStatus(index)"></i>
-                                <i class="fa-solid fa-trash-can" @click="deleteTask(index)"></i>
-                            </div>
-                        </li>
+                        <template v-for="(task,index) in tasklist">
+                            <li class="m-3 d-flex justify-content-between fs-4" v-if="!task.done">
+                                <span class="uncomplete_text">{{task.text}}</span>
+                                <div class="uncomplete">
+                                    <i class="fa fa-check-circle" aria-hidden="true" @click="changeStatus(index)"></i>
+                                    <i class="fa-solid fa-trash-can" @click="deleteTask(index)"></i>
+                                </div>
+                            </li>
+                        </template>
                     </ul>
                     <p class="text-center fw-bold display-3" v-else>You completed all the tasks today,<br> great job
                     </p>
@@ -84,14 +85,16 @@ include "storeTasks.php"
                 <h3 class=" fw-bold text-center">Completed tasks</h3>
                 <div class="tasks overflow-auto W-100">
                     <ul class="my_ul list-unstyled text-decoration-line-through" v-if="tasklist.length">
-                        <li class=" justify-content-between fs-4" v-for="(task,index) in tasklist"
-                            :class="!task.done ? 'd-none' : 'm-3 d-flex'">
-                            <span>{{task.text}}</span>
-                            <div class="complete"> <!-- @click="completeTask(index)"-->
-                                <i class="fa fa-check-circle" aria-hidden="true" @click="changeStatus(index)"></i>
-                                <i class="fa-solid fa-trash-can" @click="deleteTask(index)"></i>
-                            </div>
-                        </li>
+
+                        <template v-for="(task,index) in tasklist">
+                            <li v-if="task.done" class=" justify-content-between fs-4 m-3 d-flex">
+                                <span>{{task.text}}</span>
+                                <div class="complete"> <!-- @click="completeTask(index)"-->
+                                    <i class="fa fa-check-circle" aria-hidden="true" @click="changeStatus(index)"></i>
+                                    <i class="fa-solid fa-trash-can" @click="deleteTask(index)"></i>
+                                </div>
+                            </li>
+                        </template>
                     </ul>
                 </div>
             </div>

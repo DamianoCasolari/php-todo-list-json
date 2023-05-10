@@ -60,19 +60,19 @@ createApp({
                 {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }).then(response => {
-                    this.taskList = response.data;
+                    this.tasklist = response.data;
                 })
         },
         changeStatusJson(index) {
             const data = {
-                currentIndex: index
+                'currentIndex': index
             }
 
             axios.post(this.statusUrl, data,
                 {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }).then(response => {
-                    this.taskList = response.data;
+                    this.tasklist = response.data;
                 })
         },
         addTask() {
@@ -91,12 +91,10 @@ createApp({
             }
         },
         deleteTask(index) {
-            this.tasklist.splice(index, 1)
             this.deleteJsonElement(index)
 
         },
         changeStatus(index) {
-            this.tasklist[index].done = !this.tasklist[index].done
             this.changeStatusJson(index)
             console.log(this.allTasksUndone);
         }
