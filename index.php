@@ -81,11 +81,9 @@ include "storeTasks.php"
             <!-- create tasks complete container  -->
             <div class="Task_complete_container card rounded-5 p-3 my_font justify-content-center flex-grow-1"
                 v-if="tasklist.length > 0" v-show="!allTasksUndone">
-
                 <h3 class=" fw-bold text-center">Completed tasks</h3>
                 <div class="tasks overflow-auto W-100">
                     <ul class="my_ul list-unstyled text-decoration-line-through" v-if="tasklist.length">
-
                         <template v-for="(task,index) in tasklist">
                             <li v-if="task.done" class=" justify-content-between fs-4 m-3 d-flex">
                                 <span>{{task.text}}</span>

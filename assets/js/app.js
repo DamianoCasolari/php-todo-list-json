@@ -4,8 +4,6 @@ createApp({
     data() {
         return {
             tasklist: [],
-            tasks: [],
-            tasksComplete: [],
             listUrl: "getTasks.php",
             storeUrl: "storeTasks.php",
             statusUrl: "changeStatus.php",
@@ -32,10 +30,8 @@ createApp({
         createTaskList() {
             axios.get(this.listUrl).then(response => {
                 this.tasklist = response.data;
-                console.log(this.tasklist);
-                this.tasksComplete = this.tasklist.filter((object) => object.done == true);
-                console.log(this.tasksComplete);
-                this.tasks = this.tasklist.filter((object) => object.done == false);
+            }).catch(error => {
+                console.error(error);
             })
         },
         changeJsonList(newTask) {
@@ -49,6 +45,8 @@ createApp({
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }).then(response => {
                     this.taskList = response.data;
+                }).catch(error => {
+                    console.error(error.message);
                 })
         },
         deleteJsonElement(index) {
@@ -61,6 +59,8 @@ createApp({
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }).then(response => {
                     this.tasklist = response.data;
+                }).catch(error => {
+                    console.error(error.message);
                 })
         },
         changeStatusJson(index) {
@@ -73,12 +73,13 @@ createApp({
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }).then(response => {
                     this.tasklist = response.data;
+                }).catch(error => {
+                    console.error(error.message);
                 })
         },
         addTask() {
             if (this.newTask.text.length > 5) {
                 this.tasklist.unshift(this.newTask)
-                this.tasks.unshift(this.newTask)
                 this.changeJsonList(this.newTask)
                 this.newTask = {
                     text: "",
@@ -105,75 +106,3 @@ createApp({
     }
 
 }).mount('#app')
-
-
-
-
-
-
-
-// const { createApp } = Vue
-
-// createApp({
-//     data() {
-//         return {
-//             error: null,
-//             newTask: {
-//                 text: "",
-//                 done: false,
-//             },
-//             tasks: [
-//                 { text: "Pulire la cucina", done: false },
-//                 { text: "Fare la spesa", done: true },
-//                 { text: "Stirare la biancheria", done: false },
-//                 { text: "Preparare la cena", done: true },
-//                 { text: "Passeggiare il cane", done: false },
-//                 { text: "Scrivere una lettera", done: true },
-//             ],
-//             tasksComplete: [],
-//             endDay: new Date().setHours(24, 0, 0),
-//             timeLeft: '',
-
-//         }
-//     },
-//     methods: {
-//         addTask() {
-//             if (this.newTask.text.length > 5) {
-//                 this.tasks.unshift(this.newTask)
-//                 this.newTask = {
-//                     text: "",
-//                     done: false,
-//                 },
-//                     this.error = ""
-//             } else {
-//                 this.error = "word too short"
-//             }
-//         },
-//         changeStatus(index) {
-//             console.log(index);
-//             this.tasksComplete.unshift(this.tasks[index])
-//             this.tasks.splice(index, 1)
-
-//         },
-//         startCountdown() {
-//             setInterval(() => {
-//                 const currentTime = new Date().getTime();
-//                 const timeDiff = this.endDay - currentTime;
-//                 const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
-//                 const minutesLeft = Math.floor(
-//                     (timeDiff % (1000 * 60 * 60)) / (1000 * 60)
-//                 );
-//                 const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
-//                 this.timeLeft = `${hoursLeft}h ${minutesLeft}m ${secondsLeft}s`;
-//             }, 1000);
-//         },
-//     },
-//     created() {
-//         this.tasksComplete = this.tasks.filter((object) => object.done === true);
-//         this.tasks = this.tasks.filter((object) => object.done === false);
-//         // this.tasks = this.tasksUncomplete;
-//         this.startCountdown();
-//     },
-
-
-// }).mount('#app')
